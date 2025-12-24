@@ -18,6 +18,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 async function declutterTabs() {
   // Get current-window tabs
   const tabs = await chrome.tabs.query({ currentWindow: true });
+  const settings = await chrome.storage.sync.get({
+  google: true,
+  youtube: true,
+  reddit: true
+});
 
   const tabsToClose = []; //creats an empty loop to collect tabs which are to be closed
 
@@ -41,27 +46,31 @@ async function declutterTabs() {
     }
     //=====================================
     // for empty google pages but not all
-    try {
-    const url = new URL(tab.url);
+   try {
+  const url = new URL(tab.url);
 
-    const isGoogleDomain =
-      url.hostname === "google.com" ||
-      url.hostname === "www.google.com" ||
-      url.hostname === "google.co.in" ||
-      url.hostname === "www.google.co.in";
+  const isGoogleDomain =
+    url.hostname === "google.com" ||
+    url.hostname === "www.google.com" ||
+    url.hostname === "google.co.in" ||
+    url.hostname === "www.google.co.in";
 
-     const isEmptyHomePage =
-      url.pathname === "/" &&
-     !url.search; // no ?q=anything
+  // Read the real search query parameter
+  const hasSearchQuery = url.searchParams.has("q");
 
-       if (isGoogleDomain && isEmptyHomePage) {
-     console.log("Declutter: closing empty Google home:", tab.url);
-      tabsToClose.push(tab.id);
-     continue;
-   }
-    } catch (e) {
-  // ignore invalid URLs safely
-    } 
+  // Google home page (even with tracking params)
+  const isGoogleHome =
+    url.pathname === "/" && !hasSearchQuery;
+
+  if (settings.google && isGoogleDomain && isGoogleHome) {
+    console.log("Declutter: closing Google home page:", tab.url);
+    tabsToClose.push(tab.id);
+    continue;
+  }
+
+} catch (e) {
+  // invalid URL, ignore
+}
      //=====================================
     // for youtube home pages
       try {
@@ -82,22 +91,58 @@ async function declutterTabs() {
   const isSearchPage =
     url.pathname === "/results";
 
-  if (
-    isYouTubeDomain &&
-    isYouTubeHome &&
-    !isWatchingVideo &&
-    !isSearchPage
-  ) {
+ if (
+  settings.youtube &&
+  isYouTubeDomain &&
+  isYouTubeHome &&
+  !isWatchingVideo &&
+  !isSearchPage
+) {
+ 
     console.log("Declutter: closing YouTube home:", tab.url);
+    tabsToClose.push(tab.id);
+    continue;
+ 
+      }} 
+catch (e) {
+  // safe ignore
+}
+ //=====================================
+   
+ // for reddit
+ try {
+  const url = new URL(tab.url);
+
+  const isRedditDomain =
+    url.hostname === "www.reddit.com" ||
+    url.hostname === "reddit.com" ||
+    url.hostname === "old.reddit.com";
+
+  const isRedditHome =
+    url.pathname === "/";
+
+  const isPopularOrAll =
+    url.pathname === "/r/popular" ||
+    url.pathname === "/r/all";
+
+  const isSearchPage =
+    url.pathname === "/search";
+
+  if (
+  settings.reddit &&
+  isRedditDomain &&
+  (isRedditHome || isPopularOrAll) &&
+  !isSearchPage
+) 
+{
+    console.log("Declutter: closing Reddit feed:", tab.url);
     tabsToClose.push(tab.id);
     continue;
   }
 } catch (e) {
   // safe ignore
 }
- //=====================================
-   
-   
+
   } // end for loop
 
       // Remove collected tabs (if any)

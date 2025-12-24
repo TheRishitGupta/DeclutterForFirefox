@@ -4,25 +4,69 @@
   <meta charset="UTF-8" />
   <title>Declutter</title>
   <link rel="stylesheet" href="popup.css" />
+ 
+
 </head>
 <body>
 
-  <div class="container">
-    <p>Declutter</p>
+      <div class ="container1">
+        <p>DECLUTTER</p>
+      </div>
 
-    <p class="subtitle">
-      Close unnecessary tabs with one click.
-    </p>
-
-     <div class="center">
-      <button type="button" id="mybutton">
+<div class="container2">
+  <p class="info"> Close unnecessary tabs with one click.</p> 
+ <button type="button" id="mybutton">
         <div class="top">Declutter Now!</div>
         <div class="bottom"></div>
       </button>
-    </div>
+      <p id="result" class="result"></p>
+</div>
 
-    <p id="result" class="result"></p>
+<div class="container3">
+
+  <p class="settings">Settings</p>
+
+  
+</div>
+
+ <div class="container4">
+ <p class="info">▸ choose sites to close</p>
+ 
+
+</div>
+
+<div class="list">
+
+  <div class="row">
+   
+    <span class="name">Google</span>
+    <label class="switch">
+      <input type="checkbox" id="toggle-google" checked>
+      <span class="slider"></span>
+    </label>
   </div>
+
+  <div class="row">
+  
+    <span class="name">YouTube</span>
+    <label class="switch">
+      <input type="checkbox" id="toggle-youtube" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="row">
+
+    <span class="name">Reddit</span>
+    <label class="switch">
+      <input type="checkbox" id="toggle-reddit" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+</div>
+
+
 
   <script src="popup.js"></script>
 </body>

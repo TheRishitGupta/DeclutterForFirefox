@@ -4,13 +4,20 @@
   "description": "Closes unnecessary browser tabs via a button or keyboard shortcut. Includes default rules and allows users to customize which tabs should be closed.",
   "version": "1.0.0",
 
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "declutter-tabs@example.com",
+      "strict_min_version": "115.0"
+    }
+  },
+
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "Declutter Tabs"
   },
 
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"]
   },
 
   "permissions": [
@@ -35,5 +42,4 @@
     "64": "images/icon-64.png",
     "128": "images/icon-128.png"
   }
-  
 }

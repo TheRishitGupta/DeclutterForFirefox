@@ -6,14 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggles = {
   google: document.getElementById("toggle-google"),
   youtube: document.getElementById("toggle-youtube"),
-  reddit: document.getElementById("toggle-reddit")
+  reddit: document.getElementById("toggle-reddit"), 
+  chatgpt: document.getElementById("toggle-chatgpt")
 };
 chrome.storage.sync.get(
-  { google: true, youtube: true, reddit: true },
+  { google: true, youtube: true, reddit: true, chatgpt: true },
   (settings) => {
     toggles.google.checked = settings.google;
     toggles.youtube.checked = settings.youtube;
     toggles.reddit.checked = settings.reddit;
+    toggles.chatgpt.checked = settings.chatgpt;
   }
 );
 Object.keys(toggles).forEach((key) => {

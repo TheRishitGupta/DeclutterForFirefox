@@ -21,10 +21,11 @@ async function declutterTabs() {
   const settings = await chrome.storage.sync.get({
   google: true,
   youtube: true,
-  reddit: true
+  reddit: true,
+  chatgpt: true 
 });
 
-  const tabsToClose = []; //creats an empty loop to collect tabs which are to be closed
+  const tabsToClose = []; //creats an empty array to collect tabs which are to be closed
 
   for (const tab of tabs) {
     // Basic safety filters
@@ -143,6 +144,38 @@ catch (e) {
   // safe ignore
 }
 
+
+//=====================================
+// for ChatGPT (close empty tabs only)
+try {
+  const url = new URL(tab.url);
+
+  const isChatGPTDomain =
+    url.hostname === "chatgpt.com";
+
+  // Empty ChatGPT home (no conversation started)
+  const isChatGPTHome =
+    url.pathname === "/";
+
+  // Active conversation pages always start with /c/
+  const isChatGPTConversation =
+    url.pathname.startsWith("/c/");
+
+  if (
+    settings.chatgpt &&
+    isChatGPTDomain &&
+    isChatGPTHome &&
+    !isChatGPTConversation
+  ) {
+    console.log("Declutter: closing empty ChatGPT tab:", tab.url);
+    tabsToClose.push(tab.id);
+    continue;
+  }
+} catch (e) {
+  // safe ignore
+}
+
+
   } // end for loop
 
       // Remove collected tabs (if any)
@@ -159,4 +192,4 @@ catch (e) {
 
   return { closedCount: tabsToClose.length };
 }
-//====================================================================================================================================================================================
+//============================================================================

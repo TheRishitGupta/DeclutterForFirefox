@@ -1,11 +1,11 @@
-**Declutter – Chrome Tab Cleaner**
+**Declutter – Firefox Tab Cleaner**
 
-Declutter is a lightweight Chrome extension that helps keep your browser clean by closing unnecessary tabs on press of a button such as the Chrome new tab page and Google homepage. It works via a popup button or a keyboard shortcut and is designed to be safe, simple, and user-controlled.
+Declutter is a lightweight Firefox extension that helps keep your browser clean by closing unnecessary tabs on press of a button such as the Firefox new tab page and Google homepage. It works via a popup button or a keyboard shortcut and is designed to be safe, simple, and user-controlled.
 
 
 **Features (Current Version 1.0.2)**
 
--Closes new chrome tab pages
+-Closes new Firefox tab pages
 
 -Closes Google homepage tabs (google.com, google.co.in)
 
@@ -27,9 +27,9 @@ Declutter is a lightweight Chrome extension that helps keep your browser clean b
 
 1.Download all files
 
-2.Open Chrome
+2.Open Firefox
 
-3.Go to: chrome://extensions
+3.Go to: Firefox://extensions
 
 4.Enable Developer mode (top right)
 

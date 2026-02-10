@@ -3,13 +3,17 @@ DeclutterForFirefox is a port of Declutter for Firefox Browser.
 Declutter is a lightweight Chrome extension that helps keep your browser clean by closing unnecessary tabs on press of a button such as the Chrome new tab page and Google homepage. It works via a popup button or a keyboard shortcut and is designed to be safe, simple, and user-controlled.
 
 
-**Features (Current Version 1.0.2)**
+**Features (Current Version 1.0.1)**
 
 - Closes new tabs
 
 - Closes Google homepage tabs (google.com, google.co.in)
 
 - Closes YouTube homepage tabs
+
+- Close Reddit homepage tabs
+
+- Close ChatGPT homepage tabs
 
 - Works with one click from the extension popup
 
@@ -22,7 +26,7 @@ Declutter is a lightweight Chrome extension that helps keep your browser clean b
 - Pinned tabs
 
 
-**How to Install (Developer Mode)**
+**How to Install**
 
 1. Download .xpi file from releases
 2. Open about:addons

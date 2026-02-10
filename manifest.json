@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Declutter",
   "description": "Closes unnecessary browser tabs via a button or keyboard shortcut. Includes default rules and allows users to customize which tabs should be closed.",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "browser_specific_settings": {
     "gecko": {
